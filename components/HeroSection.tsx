@@ -7,8 +7,8 @@ import Button from './Button'
 
 export default function HeroSection() {
     return (
-        <div className='w-full flex bg-white h-[92vh]'>
-            <div className='w-1/2 flex justify-center items-start pt-32'>
+        <div className='w-full flex bg-white h-[72vh]'>
+            <div className='w-1/2 flex justify-center items-start pt-32 pl-32'>
                 <div className='flex flex-col gap-5'>
                     <div className='px-4 py-2 w-max rounded-full bg-[#E5EDFF] flex flex-row justify-center items-center gap-3'>
                         <FontAwesomeIcon icon={faMoneyBill1Wave} className='h-6 w-6 text-secondary' />
@@ -17,7 +17,6 @@ export default function HeroSection() {
                         </p>
                     </div>
                     <div>
-
                         <span className="text-primary text-5xl">Count & pay</span>
                         <span className="text-secondary text-5xl"> responsibly</span>
                         <p className='text-primary text-5xl mt-3'>By using <span className='text-6xl text-secondary'>Cashwise!</span></p>
@@ -35,7 +34,7 @@ export default function HeroSection() {
                 </div>
 
             </div>
-            <div className='w-1/2 flex justify-start items-start pt-32 pl-32'>
+            <div className='w-1/2 flex justify-center items-start pt-32'>
                 <Image
                     src={countingCash}
                     alt='Counting cash'
