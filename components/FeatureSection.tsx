@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function FeatureSection() {
     return (
-        <div className='bg-[#FFEEFE] h-[90vh] flex justify-center items-start pt-20'>
+        <div className='bg-[#F3f3f3] h-[100vh] flex justify-center items-start pt-20'>
             <div className='flex flex-col gap-14'>
                 <p className='text-primary text-4xl'>
                     <span className='text-secondary text-4xl'>
