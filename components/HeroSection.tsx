@@ -7,7 +7,7 @@ import Button from './Button'
 
 export default function HeroSection() {
     return (
-        <div className='w-full flex bg-white h-[100vh]'>
+        <div className='w-full flex bg-white h-[90vh]'>
             <div className='w-1/2 flex justify-center items-center pl-32'>
                 <div className='flex flex-col gap-5'>
                     <div className='px-4 py-2 w-max rounded-full bg-[#E5EDFF] flex flex-row justify-center items-center gap-3'>
@@ -30,7 +30,7 @@ export default function HeroSection() {
                         </p>
                     </div>
 
-                    <Button text='Start Now' />
+                    <Button text='Start Now' hasArrow={true} />
                 </div>
 
             </div>

@@ -5,7 +5,7 @@ import Button from './Button'
 
 export default function Navbar() {
     return (
-        <nav className='flex items-center justify-around bg-primary h-[10vh] fixed top-0 right-0 left-0 z-50'>
+        <nav className='flex items-center justify-around bg-primary h-[10vh] fixed right-0 left-0 z-50'>
             <Link href="/" className="cursor-pointer">
                 <Image src="/images/Cashwise.png" width={150} height={150} alt='cashwise logo' className='cursor-pointer' />
             </Link>
@@ -21,8 +21,12 @@ export default function Navbar() {
                 </li>
             </ul>
             <div className='flex flex-row gap-5'>
-                <Button text='Sign In' hoverColor='purple' />
-                <Button text='Sign Up' hoverColor='purple' />
+                <Link href='/signUp'>
+                    <Button text='Sign Up' />
+                </Link>
+                <Link href='/signIn'>
+                    <Button text='Sign In' />
+                </Link>
             </div>
         </nav>
     )
