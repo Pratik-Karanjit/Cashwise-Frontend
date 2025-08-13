@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../../components/Button'
+import Link from 'next/link'
 
 export default function SignIn() {
     return (
@@ -26,7 +27,15 @@ export default function SignIn() {
                         />
                     </div>
                 </form>
-                <Button text='Submit' hasArrow={false} />
+                <div className='w-full flex flex-col items-center justify-center gap-5'>
+                    <Button text='Submit' hasArrow={false} />
+                    <p className='text-primary text-sm'>
+                        Don't have an account? &nbsp;
+                        <Link href='/signUp'>
+                            <span className='text-secondary cursor-pointer'>Sign Up</span>
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     )
