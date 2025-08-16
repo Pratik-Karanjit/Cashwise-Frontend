@@ -1,9 +1,15 @@
+"use client"
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import Button from './Button'
+import { useSession, signOut } from 'next-auth/react'
 
 export default function Navbar() {
+    const { data: session } = useSession()
+    console.log("session data: ", session)
+
     return (
         <nav className='flex items-center justify-around bg-primary h-[10vh] fixed right-0 left-0 z-50'>
             <Link href="/" className="cursor-pointer">
@@ -21,12 +27,23 @@ export default function Navbar() {
                 </li>
             </ul>
             <div className='flex flex-row gap-5'>
-                <Link href='/signUp'>
-                    <Button text='Sign Up' />
-                </Link>
-                <Link href='/signIn'>
-                    <Button text='Sign In' />
-                </Link>
+                {!session ? (
+                    <>
+                        <Link href='/signUp'>
+                            <Button text='Sign Up' />
+                        </Link>
+                        <Link href='/signIn'>
+                            <Button text='Sign In' />
+                        </Link>
+                    </>
+                ) : (
+                    <>
+                        <p className="text-white">Hello {session.user?.email}</p>
+                        <button onClick={() => signOut()} className="text-white">
+                            Logout
+                        </button>
+                    </>
+                )}
             </div>
         </nav>
     )

@@ -1,20 +1,12 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL // http://localhost:8000/api
-  // withCredentials: true <-- REMOVE this
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  withCredentials: true, // allow cookie to be sent
 });
 
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+
+api.interceptors.request.use((config) => config);
 
 api.interceptors.response.use(
   (response) => response,

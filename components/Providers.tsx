@@ -1,8 +1,13 @@
-'use client';
+"use client";
 
 import { SessionProvider } from "next-auth/react";
-import React from "react";
+import Navbar from "./Navbar";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-    return <SessionProvider>{children}</SessionProvider>;
+    return (
+        <SessionProvider>
+            <Navbar />
+            <div style={{ paddingTop: "10vh" }}>{children}</div>
+        </SessionProvider>
+    );
 }

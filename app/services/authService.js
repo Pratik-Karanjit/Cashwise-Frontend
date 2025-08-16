@@ -5,3 +5,10 @@ export const registerUser = async (userData) => {
   console.log("data is: ", data)
   return data;
 };
+
+export const loginUser = async (userData) => {
+  console.log("entered login user")
+  const {data} = await api.post("/auth/login", userData)
+  console.log("logged in data is: ", data)
+  return data;
+}
