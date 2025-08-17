@@ -1,12 +1,21 @@
 import axios from "axios";
+import { getSession } from "next-auth/react";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  withCredentials: true, // allow cookie to be sent
+  withCredentials: true, 
 });
 
+api.interceptors.request.use(async (config) => {
+  const session = await getSession(); // get NextAuth session
+  const token = session?.user?.token; // sending backend's stored JWT in session
 
-api.interceptors.request.use((config) => config);
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
 
 api.interceptors.response.use(
   (response) => response,

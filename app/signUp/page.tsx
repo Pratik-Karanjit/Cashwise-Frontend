@@ -9,6 +9,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { registerUser } from '../services/authService';
 import Button from '../../components/Button';
+import { useRouter } from 'next/navigation';
 
 const validationSchema = Yup.object({
     firstName: Yup.string().required("First Name is required"),
@@ -21,6 +22,7 @@ const validationSchema = Yup.object({
 });
 
 export default function SignUp() {
+    const router = useRouter()
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -33,8 +35,7 @@ export default function SignUp() {
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             try {
                 const res = await registerUser(values);
-                console.log("✅ Registered:", res);
-                alert("Nice")
+                router.push("/signIn")
             } catch (err) {
                 setErrors({ email: err.response?.data?.message || "Registration failed" });
             } finally {

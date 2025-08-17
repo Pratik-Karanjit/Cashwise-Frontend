@@ -1,9 +1,8 @@
 // auth.ts
-import NextAuth, { NextAuthOptions, Session, User } from "next-auth";
+import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import api from "./utils/api";
-
 
 // Define a type for your JWT token
 interface MyToken {
@@ -40,7 +39,16 @@ export const authOptions: NextAuthOptions = {
             password: credentials.password,
           });
 
-          if (res.data?.result) return res.data.result;
+          // Expect backend to return: { result: { id, email, role, token } }
+          const user = res.data?.result;
+          if (user) {
+            return {
+              id: user._id || user.id,
+              email: user.email,
+              role: user.role,
+              token: user.token, // attach backend token here
+            };
+          }
           return null;
         } catch (err) {
           console.error("Auth error:", err);
@@ -60,12 +68,14 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       const t = token as MyToken;
+
       if (user) {
         t.id = (user as any).id;
         t.email = (user as any).email;
         t.role = (user as any).role;
-        t.accessToken = (user as any).token;
+        t.accessToken = (user as any).token; // backend token
       }
+
       return t;
     },
 
@@ -78,9 +88,10 @@ export const authOptions: NextAuthOptions = {
           id: t.id,
           email: t.email,
           role: t.role,
-          token: t.accessToken,
+          token: t.accessToken, // make token available on client
         };
       }
+
       return s;
     },
   },
