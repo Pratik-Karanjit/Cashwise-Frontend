@@ -7,8 +7,17 @@ import Button from './Button'
 import { useSession, signOut } from 'next-auth/react'
 
 export default function Navbar() {
-    const { data: session } = useSession()
+    const { data: session, status } = useSession();
     console.log("session data: ", session)
+
+    if (status === "loading") {
+        // Show nothing or a skeleton while session is being fetched
+        return (
+            <nav className="flex items-center justify-around bg-primary h-[10vh] fixed right-0 left-0 z-50">
+                <p className="text-white">Loading...</p>
+            </nav>
+        );
+    }
 
     return (
         <nav className='flex items-center justify-around bg-primary h-[10vh] fixed right-0 left-0 z-50'>
@@ -37,12 +46,11 @@ export default function Navbar() {
                         </Link>
                     </>
                 ) : (
-                    <>
-                        <p className="text-white">Hello {session.user?.email}</p>
-                        <button onClick={() => signOut()} className="text-white">
-                            Logout
-                        </button>
-                    </>
+                    <div className='flex items-center justify-center flex-row gap-5'>
+                        {/* <p className="text-white">Hello, {session.user?.email}</p> */}
+                        <Button text='Logout' onClick={() => signOut()} />
+
+                    </div>
                 )}
             </div>
         </nav>

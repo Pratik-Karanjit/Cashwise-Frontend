@@ -85,7 +85,7 @@ export default function SignIn() {
                         )}
                     </div>
                     <div className='w-full flex flex-col items-center justify-center gap-5'>
-                        <Button text={formik.isSubmitting ? 'Submitting...' : 'Submit'} hasArrow={false} />
+                        <Button text={formik.isSubmitting ? 'Submitting...' : 'Submit'} type="submit" hasArrow={false} />
                         <p className='text-primary text-sm'>
                             Don't have an account? &nbsp;
                             <Link href='/signUp'>

@@ -12,3 +12,8 @@ export const loginUser = async (userData) => {
   console.log("logged in data is: ", data)
   return data;
 }
+
+export const testMyApi = async() => {
+  const response = await api.get("/auth/testApi")
+  console.log("response is: ", response)
+}

@@ -1,16 +1,26 @@
-"use client"
-
 import { faArrowRight, faMoneyBill1Wave } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import React from 'react'
 import countingCash from "../public/images/counting.png"
 import Button from './Button'
+import Link from 'next/link'
 
 export default function HeroSection() {
+
+    // const fetchTest = async () => {
+    //     const response = await testMyApi()
+    //     console.log("response iss******", response)
+    // }
+
+    // useEffect(() => {
+    //     fetchTest()
+    // }, [])
+
+
     return (
         <div className='w-full flex bg-white h-[90vh]'>
-            <div className='w-1/2 flex justify-center items-center pl-32'>
+            <div className='w-1/2 flex justify-center items-start pt-44 pl-32'>
                 <div className='flex flex-col gap-5'>
                     <div className='px-4 py-2 w-max rounded-full bg-[#E5EDFF] flex flex-row justify-center items-center gap-3'>
                         <FontAwesomeIcon icon={faMoneyBill1Wave} className='h-6 w-6 text-secondary' />
@@ -31,12 +41,13 @@ export default function HeroSection() {
                             Stay on top <br /> of your finances, gain valuable insights into your spending habits, and <br /> make smarter financial decisions.
                         </p>
                     </div>
-
-                    <Button text='Start Now' hasArrow={true} />
+                    <Link href='/options'>
+                        <Button text='Start Now' hasArrow={true} />
+                    </Link>
                 </div>
 
             </div>
-            <div className='w-1/2 flex justify-center items-center'>
+            <div className='w-1/2 flex justify-center items-start pt-44'>
                 <Image
                     src={countingCash}
                     alt='Counting cash'

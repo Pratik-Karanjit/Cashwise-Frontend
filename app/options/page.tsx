@@ -1,0 +1,50 @@
+import { faArrowLeft, faArrowRight, faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import Button from "../../components/Button";
+import Image from "next/image";
+import countingCash from "../../public/images/counting.png"
+
+
+
+export default function HeroSection() {
+
+    // const fetchTest = async () => {
+    //     const response = await testMyApi()
+    //     console.log("response iss******", response)
+    // }
+
+    // useEffect(() => {
+    //     fetchTest()
+    // }, [])
+
+
+    return (
+        <div className='w-full flex bg-white h-[90vh]'>
+            <div className='w-1/2 flex justify-center items-start pt-44'>
+                <div className='flex flex-col gap-5'>
+
+                    <span className="text-primary text-3xl">Choose your split <span className='text-3xl text-secondary'>option!</span></span>
+                    <div className="mt-5 flex flex-row items-center justify-start gap-2 group cursor-pointer -ml-7">
+                        <FontAwesomeIcon
+                            icon={faArrowRight}
+                            className="inline-block -translate-x-5 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-secondary"
+                        />
+                        <p className="text-[#5E6282] text-4xl group-hover:text-secondary transition-all duration-300 ">
+                            Split Bill
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div className='w-1/2 flex justify-center items-start pt-44'>
+                <Image
+                    src={countingCash}
+                    alt='Counting cash'
+                    width={420}
+                    height={420}
+                />
+            </div>
+        </div >
+    )
+}
