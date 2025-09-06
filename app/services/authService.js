@@ -17,3 +17,13 @@ export const testMyApi = async() => {
   const response = await api.get("/auth/testApi")
   console.log("response is: ", response)
 }
+
+export const saveExpenses = async(data)=>{
+  const response = await api.post("/expense/group", data)
+  return response.data;
+}
+
+export const getExpenses = async () => {
+  const response = await api.get("/expense/group");
+  return response.data;
+};

@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import Button from "../../components/Button";
+import { useQuery } from "@tanstack/react-query";
+import { saveExpenses } from "../services/authService";
+import { useExpenses } from "../../hooks/useExpenses";
 
 type Expense = {
     id: number;
@@ -15,7 +18,8 @@ export default function GroupExpenses() {
     const [people, setPeople] = useState<{ id: number; name: string }[]>([{ id: 1, name: "" }]);
     const [expenses, setExpenses] = useState<Expense[]>([]);
 
-    // --- People functions ---
+    const { isLoading, error, saveExpenses, isSaving } = useExpenses();
+
     const addPerson = () => {
         const newPerson = { id: Date.now(), name: "" };
         setPeople([...people, newPerson]);
@@ -41,7 +45,6 @@ export default function GroupExpenses() {
         return person ? person.name : "";
     };
 
-    // --- Expenses functions ---
     const addExpense = () => {
         if (people.length === 0) return;
         setExpenses([
@@ -73,7 +76,6 @@ export default function GroupExpenses() {
         }));
     };
 
-    // --- Balance Calculation ---
     const calculateBalances = () => {
         const balances: Record<string, number> = {};
         people.forEach(p => {
@@ -95,7 +97,6 @@ export default function GroupExpenses() {
 
     const balances = calculateBalances();
 
-    // --- Settlement Calculation ---
     const settleDebts = (balances: Record<string, number>) => {
         const debtors: { name: string; amount: number }[] = [];
         const creditors: { name: string; amount: number }[] = [];
@@ -129,13 +130,11 @@ export default function GroupExpenses() {
 
     return (
         <div className="w-full flex bg-white min-h-[90vh]">
-            {/* Left Column: People & Balances */}
             <div className="w-1/2 flex flex-col items-center pt-20 gap-8 pb-10">
                 <span className="text-primary text-3xl">
                     Group <span className="text-secondary">Expenses</span>
                 </span>
 
-                {/* People Section */}
                 <div className="flex flex-col gap-4 w-full max-w-md">
                     <span className="text-lg font-semibold text-primary">Add People</span>
                     {people.map(person => (
@@ -162,10 +161,9 @@ export default function GroupExpenses() {
                     </div>
                 </div>
 
-                {/* Balances */}
                 {expenses.length > 0 && (
                     <div className="mt-4 w-full max-w-md">
-                        <div className="bg-white border border-[#e5e5e5] border-[0.5px] rounded-xl shadow-sm p-6 flex flex-col gap-2">
+                        <div className="bg-white border-[#e5e5e5] border-[0.5px] rounded-xl shadow-sm p-6 flex flex-col gap-2">
                             <h2 className="text-xl font-bold mb-2 text-primary">Balances</h2>
                             <div className="divide-y divide-[#e5e5e5]">
                                 {Object.entries(balances).map(([person, balance]) => (
@@ -181,9 +179,8 @@ export default function GroupExpenses() {
                     </div>
                 )}
 
-                {/* Settlements */}
                 {transactions.length > 0 && (
-                    <div className="mt-4 w-full max-w-md">
+                    <div className="flex flex-col gap-5 mt-4 w-full max-w-md">
                         <div className="bg-gradient-to-r from-green-50 to-blue-50 border-[#e5e5e5] border-[0.5px] rounded-xl shadow-sm p-6 flex flex-col gap-2">
                             <h2 className="text-lg font-bold mb-2 text-primary">Settlements</h2>
                             <ul className="list-disc pl-5">
@@ -195,11 +192,11 @@ export default function GroupExpenses() {
                                 <p className="text-gray-500">All balances are settled!</p>
                             )}
                         </div>
+                        <Button text="Save Expense" onClick={() => saveExpenses(expenses)} />
                     </div>
                 )}
             </div>
 
-            {/* Right Column: Expenses */}
             <div className="w-1/2 flex flex-col gap-6 mt-4 pt-20 pr-10 pb-10">
                 <div className="flex flex-col gap-4">
                     {/* <span className="text-lg font-semibold text-primary">Add Expenses</span> */}
@@ -208,8 +205,7 @@ export default function GroupExpenses() {
                         {expenses.map(exp => (
                             <div
                                 key={exp.id}
-                                className="p-4 border border-[#e5e5e5] border-[0.5px] rounded-lg shadow-sm bg-white"
-                            // Thin, light border
+                                className="p-4 border-[#e5e5e5] border-[0.5px] rounded-lg shadow-sm bg-white"
                             >
                                 <input
                                     type="text"
