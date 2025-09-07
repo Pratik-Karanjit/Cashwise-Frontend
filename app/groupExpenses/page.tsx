@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { useQuery } from "@tanstack/react-query";
 import { saveExpenses } from "../services/authService";
 import { useExpenses } from "../../hooks/useExpenses";
+import Swal from "sweetalert2";
 
 type Expense = {
     id: number;
@@ -18,7 +19,43 @@ export default function GroupExpenses() {
     const [people, setPeople] = useState<{ id: number; name: string }[]>([{ id: 1, name: "" }]);
     const [expenses, setExpenses] = useState<Expense[]>([]);
 
-    const { isLoading, error, saveExpenses, isSaving } = useExpenses();
+    const {
+        isLoading,
+        error,
+        saveExpenses,
+        isSaving,
+        saveData,
+        saveError
+    } = useExpenses();
+
+    console.log("saved data", saveData)
+    console.log("saved error", saveError)
+
+    useEffect(() => {
+        if (saveData?.success) {
+            Swal.fire({
+                title: 'Success!',
+                text: saveData.message,
+                icon: 'success',
+                confirmButtonColor: '#3563d9'
+            }).then(() => {
+                // Clear the form after successful save
+                setExpenses([]);
+                setPeople([{ id: 1, name: "" }]);
+            });
+        }
+    }, [saveData]);
+
+    useEffect(() => {
+        if (saveError) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Failed to save expenses. Please try again.',
+                icon: 'error',
+                confirmButtonColor: '#3563d9'
+            });
+        }
+    }, [saveError]);
 
     const addPerson = () => {
         const newPerson = { id: Date.now(), name: "" };
@@ -192,7 +229,11 @@ export default function GroupExpenses() {
                                 <p className="text-gray-500">All balances are settled!</p>
                             )}
                         </div>
-                        <Button text="Save Expense" onClick={() => saveExpenses(expenses)} />
+                        <Button
+                            text={isSaving ? "Saving..." : "Save Expense"}
+                            onClick={() => saveExpenses(expenses, transactions)}
+                            disabled={isSaving}
+                        />
                     </div>
                 )}
             </div>

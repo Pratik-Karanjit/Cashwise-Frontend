@@ -33,6 +33,8 @@ export default function SignUp() {
         },
         validationSchema,
         onSubmit: async (values, { setSubmitting, setErrors }) => {
+            console.log("Form submitted with values:", values);
+
             try {
                 const res = await registerUser(values);
                 router.push("/signIn")
@@ -133,7 +135,12 @@ export default function SignUp() {
                     </div>
 
                     <div className='flex flex-col justify-center items-center w-full gap-5'>
-                        <Button text={formik.isSubmitting ? 'Submitting...' : 'Submit'} hasArrow={false} />
+                        <Button
+                            text={formik.isSubmitting ? 'Submitting...' : 'Submit'}
+                            type="submit"  // Add this line
+                            hasArrow={false}
+                            disabled={formik.isSubmitting}  // Add this line
+                        />
                         <p className='text-primary text-sm'>
                             Already have an account? &nbsp;
                             <Link href='/signIn'>

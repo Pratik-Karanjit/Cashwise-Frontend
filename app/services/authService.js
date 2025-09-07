@@ -1,9 +1,15 @@
 import api from "../utils/api";
 
 export const registerUser = async (userData) => {
-  const { data } = await api.post("/auth/register", userData);
-  console.log("data is: ", data)
-  return data;
+  try {
+    console.log("Attempting to register with data:", userData);
+    const { data } = await api.post("/auth/register", userData);
+    console.log("Registration response:", data);
+    return data;
+  } catch (error) {
+    console.error("Registration error:", error);
+    throw error;
+  }
 };
 
 export const loginUser = async (userData) => {
@@ -18,12 +24,14 @@ export const testMyApi = async() => {
   console.log("response is: ", response)
 }
 
-export const saveExpenses = async(data)=>{
-  const response = await api.post("/expense/group", data)
+export const saveExpenses = async(expenses, transactions) => {
+  console.log("data are:", expenses)
+  console.log("transactions are:", transactions)
+  const response = await api.post("/expense/group", { expenses, transactions });
   return response.data;
 }
 
 export const getExpenses = async () => {
-  const response = await api.get("/expense/group");
+  // const response = await api.get("/expense/group");
   return response.data;
 };

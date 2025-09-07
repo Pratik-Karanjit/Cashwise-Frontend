@@ -1,4 +1,3 @@
-// auth.ts
 import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -9,7 +8,8 @@ interface MyToken {
   id?: string;
   email?: string;
   role?: string;
-  accessToken?: string;
+  token?: string;
+  hasExpenses?: boolean;
 }
 
 // Define a type for session.user
@@ -19,6 +19,7 @@ interface MySession extends Session {
     email: string;
     role: string;
     token: string;
+    hasExpenses: boolean;
   };
 }
 
@@ -39,14 +40,17 @@ export const authOptions: NextAuthOptions = {
             password: credentials.password,
           });
 
-          // Expect backend to return: { result: { id, email, role, token } }
-          const user = res.data?.result;
-          if (user) {
+          // Get the user data from the result property
+          const userData = res.data?.result;
+          
+          if (userData) {
+            // Return all the user data
             return {
-              id: user._id || user.id,
-              email: user.email,
-              role: user.role,
-              token: user.token, // attach backend token here
+              id: userData._id,
+              email: userData.email,
+              role: userData.role,
+              token: userData.token,
+              hasExpenses: userData.hasExpenses
             };
           }
           return null;
@@ -62,39 +66,36 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 
-  session: { strategy: "jwt" },
-  secret: process.env.NEXTAUTH_SECRET,
-
   callbacks: {
     async jwt({ token, user }) {
-      const t = token as MyToken;
-
       if (user) {
-        t.id = (user as any).id;
-        t.email = (user as any).email;
-        t.role = (user as any).role;
-        t.accessToken = (user as any).token; // backend token
+        // Update token with all user data when signing in
+        token.id = user.id;
+        token.email = user.email;
+        token.role = user.role;
+        token.token = user.token;
+        token.hasExpenses = user.hasExpenses;
       }
-
-      return t;
+      return token;
     },
 
     async session({ session, token }) {
-      const t = token as MyToken;
-      const s = session as MySession;
-
-      if (t.id && t.email && t.role && t.accessToken) {
-        s.user = {
-          id: t.id,
-          email: t.email,
-          role: t.role,
-          token: t.accessToken, // make token available on client
-        };
+      if (token) {
+        // Update session with all user data from token
+        session.user = {
+          id: token.id,
+          email: token.email,
+          role: token.role,
+          token: token.token,
+          hasExpenses: token.hasExpenses
+        } as any;
       }
-
-      return s;
+      return session;
     },
   },
+
+  session: { strategy: "jwt" },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);
