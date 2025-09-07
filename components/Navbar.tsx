@@ -156,7 +156,7 @@ export default function Navbar() {
                                 {/* Menu Items */}
                                 <div className='py-1'>
                                     <Link
-                                        href="/expenses"
+                                        href="/myExpenses"
                                         onClick={closeDropdown}
                                         className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150'
                                     >
@@ -171,7 +171,7 @@ export default function Navbar() {
                                             closeDropdown()
                                             signOut()
                                         }}
-                                        className='block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors duration-150'
+                                        className='block w-full text-left px-4 py-2 cursor-pointer text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors duration-150'
                                     >
                                         Sign Out
                                     </button>

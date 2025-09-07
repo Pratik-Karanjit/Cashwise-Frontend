@@ -32,6 +32,8 @@ export const saveExpenses = async(expenses, transactions) => {
 }
 
 export const getExpenses = async () => {
-  // const response = await api.get("/expense/group");
+  console.log("entered get expenses")
+  const response = await api.get("/expense/group");
+  console.log("response is", response)
   return response.data;
 };

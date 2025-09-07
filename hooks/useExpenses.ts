@@ -5,7 +5,7 @@ import api from "../app/utils/api";
 import { saveExpenses as saveExpensesApi } from "../app/services/authService";
 import { useState } from "react";
 
-type Expense = {
+export type Expense = {
     id: number;
     description: string;
     amount: number;
@@ -13,7 +13,7 @@ type Expense = {
     participants: string[];
 };
 
-type SaveExpensesParams = {
+export type SaveExpensesParams = {
     expenses: Expense[];
     transactions: string[];
 };
