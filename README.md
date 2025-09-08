@@ -28,7 +28,7 @@ Cashwise helps users manage expenses with an intuitive interface, secure authent
 git clone https://github.com/Pratik-Karanjit/Cashwise-Frontend.git
 
 # Navigate to project directory
-cd Cashwise Frontend
+cd Cashwise-Frontend
 
 # Install dependencies
 npm install
