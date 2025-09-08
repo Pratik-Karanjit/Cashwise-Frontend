@@ -2,16 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
-import { getExpenses } from '../app/services/authService';
+import { getExpenses } from '../app/services/expenseService';
 
 function useGetExpenses() {
 
-     const { 
-        data, 
-        error, 
-        isLoading, 
-        refetch 
-    }  = useQuery({
+     const { data, error, isLoading, refetch }  = useQuery({
         queryKey: ["My Expenses"],
         queryFn: getExpenses,
         staleTime: 1000* 60 * 5,

@@ -4,12 +4,10 @@ import { Expense } from '../hooks/useExpenses';
 import useGetExpenses from '../hooks/useGetExpenses';
 import { format } from 'date-fns';
 
-// Helper function to group expenses by timestamp (rounded to the nearest second)
 const groupExpensesBySettlement = (expenses: any[]) => {
     const grouped = new Map();
 
     expenses?.forEach(expense => {
-        // Round to nearest second to group expenses created together
         const timestamp = new Date(expense.createdAt).setMilliseconds(0);
         if (!grouped.has(timestamp)) {
             grouped.set(timestamp, []);
@@ -17,7 +15,7 @@ const groupExpensesBySettlement = (expenses: any[]) => {
         grouped.get(timestamp).push(expense);
     });
 
-    return Array.from(grouped.entries()).sort((a, b) => b[0] - a[0]); // Sort by newest first
+    return Array.from(grouped.entries()).sort((a, b) => b[0] - a[0]);
 };
 
 export default function ExpensesDisplay() {
@@ -42,7 +40,6 @@ export default function ExpensesDisplay() {
                     </h2>
 
                     <div className='flex flex-col gap-4'>
-                        {/* Expenses in this settlement */}
                         {settlementExpenses.map((expense: any) => (
                             <div
                                 key={expense.id}
@@ -61,7 +58,6 @@ export default function ExpensesDisplay() {
                                     </div>
                                 </div>
 
-                                {/* Show transactions for this expense */}
                                 <div className='mt-3 pt-3 border-t border-gray-200'>
                                     <p className='text-sm font-medium text-gray-700'>Settlements:</p>
                                     <ul className='list-disc pl-5 mt-1'>

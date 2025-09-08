@@ -3,17 +3,10 @@
 import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { useQuery } from "@tanstack/react-query";
-import { saveExpenses } from "../services/authService";
+import { saveExpenses } from "../services/expenseService";
 import { useExpenses } from "../../hooks/useExpenses";
 import Swal from "sweetalert2";
-
-type Expense = {
-    id: number;
-    description: string;
-    amount: number;
-    paidBy: string;
-    participants: string[];
-};
+import { Expense } from "../../types/types";
 
 export default function GroupExpenses() {
     const [people, setPeople] = useState<{ id: number; name: string }[]>([{ id: 1, name: "" }]);
@@ -28,8 +21,6 @@ export default function GroupExpenses() {
         saveError
     } = useExpenses();
 
-    console.log("saved data", saveData)
-    console.log("saved error", saveError)
 
     useEffect(() => {
         if (saveData?.success) {

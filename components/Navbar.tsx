@@ -7,18 +7,19 @@ import Button from './Button'
 import { useSession, signOut } from 'next-auth/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { ExtendedUser } from '../types/types'
 
 export default function Navbar() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const { data: session, status } = useSession()
-    const dropdownRef = useRef(null)
+    const dropdownRef = useRef<HTMLDivElement>(null)
 
     console.log("session data: ", session)
 
     // Handle click outside to close dropdown
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setIsDropdownOpen(false)
             }
         }
@@ -36,7 +37,7 @@ export default function Navbar() {
 
     // Handle escape key to close dropdown
     useEffect(() => {
-        const handleEscapeKey = (event) => {
+        const handleEscapeKey = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
                 setIsDropdownOpen(false)
             }
@@ -77,6 +78,9 @@ export default function Navbar() {
             </nav>
         )
     }
+    //Needed this because NextAuth does not provide hasExpenses variable. 
+    //So I created an interface called ExtendedUser and casted it to user variable which now allows me to type safe the properties as per my needs
+    const user = session?.user as ExtendedUser | undefined
 
     return (
         <nav className='flex items-center justify-around bg-primary h-[10vh] fixed right-0 left-0 z-50'>
@@ -121,7 +125,7 @@ export default function Navbar() {
                 ) : null}
 
                 {/* Profile Dropdown */}
-                {session?.user?.hasExpenses && (
+                {user?.hasExpenses && (
                     <div className='relative' ref={dropdownRef}>
                         <button
                             onClick={toggleDropdown}
@@ -149,7 +153,7 @@ export default function Navbar() {
                                 {/* User Info */}
                                 <div className='px-4 py-2 border-b border-gray-100'>
                                     <p className='text-sm font-medium text-gray-900'>
-                                        {session.user?.name || session.user?.email}
+                                        {user?.name || user?.email}
                                     </p>
                                 </div>
 

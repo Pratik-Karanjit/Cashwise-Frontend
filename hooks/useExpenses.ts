@@ -2,7 +2,7 @@
 
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import api from "../app/utils/api";
-import { saveExpenses as saveExpensesApi } from "../app/services/authService";
+import { saveExpenses as saveExpensesApi } from "../app/services/expenseService";
 import { useState } from "react";
 
 export type Expense = {
