@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Button from "../../components/Button";
-import { useQuery } from "@tanstack/react-query";
 import { saveExpenses } from "../services/expenseService";
 import { useExpenses } from "../../hooks/useExpenses";
 import Swal from "sweetalert2";
@@ -12,14 +11,7 @@ export default function GroupExpenses() {
     const [people, setPeople] = useState<{ id: number; name: string }[]>([{ id: 1, name: "" }]);
     const [expenses, setExpenses] = useState<Expense[]>([]);
 
-    const {
-        isLoading,
-        error,
-        saveExpenses,
-        isSaving,
-        saveData,
-        saveError
-    } = useExpenses();
+    const { saveExpenses, isSaving, saveData, saveError } = useExpenses();
 
 
     useEffect(() => {
@@ -30,7 +22,6 @@ export default function GroupExpenses() {
                 icon: 'success',
                 confirmButtonColor: '#3563d9'
             }).then(() => {
-                // Clear the form after successful save
                 setExpenses([]);
                 setPeople([{ id: 1, name: "" }]);
             });
