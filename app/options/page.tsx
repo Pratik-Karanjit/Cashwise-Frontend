@@ -1,7 +1,6 @@
-import { faArrowLeft, faArrowRight, faMoneyBill1Wave } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import Button from "../../components/Button";
 import Image from "next/image";
 import countingCash from "../../public/images/counting.png"
 

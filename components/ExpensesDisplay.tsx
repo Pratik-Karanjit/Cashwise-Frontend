@@ -1,6 +1,5 @@
 "use client";
 
-import { Expense } from '../hooks/useExpenses';
 import useGetExpenses from '../hooks/useGetExpenses';
 import { format } from 'date-fns';
 

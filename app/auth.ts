@@ -3,26 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import api from "./utils/api";
 
-// Define a type for your JWT token
-interface MyToken {
-  id?: string;
-  email?: string;
-  role?: string;
-  token?: string;
-  hasExpenses?: boolean;
-}
-
-// Define a type for session.user
-interface MySession extends Session {
-  user: {
-    id: string;
-    email: string;
-    role: string;
-    token: string;
-    hasExpenses: boolean;
-  };
-}
-
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -67,17 +47,24 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        // Update token with all user data when signing in
-        token.id = user.id;
-        token.email = user.email;
-        token.role = user.role;
-        token.token = user.token;
-        token.hasExpenses = user.hasExpenses;
-      }
-      return token;
-    },
+   async jwt({ token, user }) {
+  if (user) {
+    const u = user as {
+      id: string;
+      email: string;
+      role: string;
+      token: string;
+      hasExpenses: boolean;
+    };
+    token.id = u.id;
+    token.email = u.email;
+    token.role = u.role;
+    token.token = u.token;
+    token.hasExpenses = u.hasExpenses;
+  }
+  return token;
+},
+
 
     async session({ session, token }) {
       if (token) {

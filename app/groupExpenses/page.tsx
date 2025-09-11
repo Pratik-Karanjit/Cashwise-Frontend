@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Button from "../../components/Button";
-import { saveExpenses } from "../services/expenseService";
 import { useExpenses } from "../../hooks/useExpenses";
 import Swal from "sweetalert2";
 import { Expense } from "../../types/types";

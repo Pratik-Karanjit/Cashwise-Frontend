@@ -37,8 +37,9 @@ export default function SignUp() {
 
             try {
                 const res = await registerUser(values);
+                console.log("res", res)
                 router.push("/signIn")
-            } catch (err) {
+            } catch (err: any) {
                 setErrors({ email: err.response?.data?.message || "Registration failed" });
             } finally {
                 setSubmitting(false);
