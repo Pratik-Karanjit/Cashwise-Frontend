@@ -146,7 +146,7 @@ export default function Navbar() {
 
                         {/* Dropdown Menu */}
                         {isDropdownOpen && (
-                            <div className='absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-md py-2 z-50'>
+                            <div className='absolute top-full right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-md py-2 z-50'>
                                 {/* Arrow pointer */}
                                 <div className='absolute -top-2 right-4 w-4 h-4 bg-white border-l border-t border-gray-200 rotate-45'></div>
 
