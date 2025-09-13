@@ -1,11 +1,17 @@
 services:
   frontend:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # Pass production arg to ensure npm run build executes
+      args:
+        NODE_ENV: production
+    image: pratikkaranjit/cashwise-fe-docker-hub:latest
     ports:
-      - "9000:9000"
+      - "8080:8080"           # Map container port 8080 to host 8080
     env_file:
-      - .env
-    volumes:
-      - .:/app          
-      - /app/node_modules
-    command: ["npm", "run", "dev"]
+      - .env                  # Load any environment variables you need
+    environment:
+      - NODE_ENV=production   # Inside the container
+      - PORT=8080             # Azure and Docker will both use 8080
+    restart: unless-stopped   # Auto-restart if the container exits
