@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Image from "next/image";
 import countingCash from "../../public/images/counting.png"
+import "./Options.css"
 
 export default function Options() {
 
@@ -16,7 +17,7 @@ export default function Options() {
                         <div className="mt-5 flex flex-row items-center justify-start gap-2 group cursor-pointer -ml-7">
                             <FontAwesomeIcon
                                 icon={faArrowRight}
-                                className="inline-block -translate-x-5 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-secondary"
+                                className="inline-block awesome-arrow -translate-x-5 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-secondary"
                             />
                             <Link href='/splitBill'>
                                 <p className="text-[#5E6282] text-4xl group-hover:text-secondary transition-all duration-300">
@@ -28,7 +29,7 @@ export default function Options() {
                         <div className="mt-5 flex flex-row items-center justify-start gap-2 group cursor-pointer -ml-7">
                             <FontAwesomeIcon
                                 icon={faArrowRight}
-                                className="inline-block -translate-x-5 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-secondary"
+                                className="inline-block awesome-arrow -translate-x-5 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-secondary"
                             />
                             <Link href='/groupExpenses'>
                                 <p className="text-[#5E6282] text-4xl group-hover:text-secondary transition-all duration-300">
