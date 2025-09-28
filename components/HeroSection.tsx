@@ -31,7 +31,7 @@ export default function HeroSection() {
                     <div>
                         <span className="text-primary text-5xl">Count & pay</span>
                         <span className="text-secondary text-5xl"> responsibly</span>
-                        <p className='text-primary text-5xl mt-3'>By using <span className='text-6xl text-secondary'>Cashwise!</span></p>
+                        <p className='text-primary text-5xl mt-3'>By using <span className='text-6xl text-secondary'>Cashwise</span></p>
                     </div>
                     <div className='mt-5'>
                         <p className='text-[#5E6282]'>
