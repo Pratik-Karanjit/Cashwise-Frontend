@@ -101,13 +101,8 @@ export default function Navbar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/about" className="hover:underline text-white transition-all duration-200">
-                        About
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/contact" className="hover:underline text-white transition-all duration-200">
-                        Contact
+                    <Link href="/feedback" className="hover:underline text-white transition-all duration-200">
+                        Feedback
                     </Link>
                 </li>
             </ul>

@@ -41,7 +41,7 @@ export default function HeroSection() {
                             Stay on top <br /> of your finances, gain valuable insights into your spending habits, and <br /> make smarter financial decisions.
                         </p>
                     </div>
-                    <Link href='/options'>
+                    <Link href='/groupExpenses'>
                         <Button text='Start Now' hasArrow={true} />
                     </Link>
                 </div>
