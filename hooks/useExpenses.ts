@@ -1,9 +1,8 @@
 "use client";
 
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "../app/utils/api";
 import { saveExpenses as saveExpensesApi } from "../app/services/expenseService";
-import { useState } from "react";
 
 export type Expense = {
     id: number;
@@ -19,9 +18,8 @@ export type SaveExpensesParams = {
 };
 
 export function useExpenses() {
-    const [queryClient] = useState(() => new QueryClient());
+    const queryClient = useQueryClient();
     
-    // For fetching existing expenses
     const {
         data: expenses,
         isLoading,
@@ -36,7 +34,7 @@ export function useExpenses() {
         mutationFn: (params: SaveExpensesParams) => 
             saveExpensesApi(params.expenses, params.transactions),
         onSuccess: (data) => {
-            // Update cache with new data
+            // Invalidate and refetch expenses data
             queryClient.invalidateQueries({ queryKey: ["expenses"] });
             console.log("Save successful:", data);
         },
@@ -53,6 +51,6 @@ export function useExpenses() {
             mutation.mutate({ expenses, transactions }),
         isSaving: mutation.isPending,
         saveError: mutation.error,
-        saveData: mutation.data // Add this to access the response data
+        saveData: mutation.data
     };
 }

@@ -19,6 +19,7 @@ const groupExpensesBySettlement = (expenses: any[]) => {
 
 export default function ExpensesDisplay() {
     const { expenses, error, isLoading } = useGetExpenses();
+    console.log("expenses are", expenses)
 
     if (isLoading) {
         return <div className="p-4">Loading expenses...</div>;
@@ -28,10 +29,21 @@ export default function ExpensesDisplay() {
         return <div className="p-4 text-red-500">Error loading expenses</div>;
     }
 
+    if (!expenses || expenses.length === 0) {
+        return (
+            <div className="text-center py-12 text-gray-500">
+                <p className="text-lg">No expenses history found</p>
+                <p className="text-sm mt-2">Start by creating your first expense group!</p>
+            </div>
+        );
+    }
+
     const groupedExpenses = groupExpensesBySettlement(expenses);
 
     return (
         <div className='flex flex-col gap-8'>
+            <h1 className="text-2xl font-semibold mb-6">My Expenses</h1>
+
             {groupedExpenses.map(([timestamp, settlementExpenses]) => (
                 <div key={timestamp} className='bg-white rounded-lg shadow-sm p-6'>
                     <h2 className="text-lg font-semibold text-gray-800 mb-4">

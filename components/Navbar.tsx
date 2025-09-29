@@ -83,25 +83,25 @@ export default function Navbar() {
     const user = session?.user as ExtendedUser | undefined
 
     return (
-        <nav className='flex items-center justify-around bg-primary h-[10vh] fixed right-0 left-0 z-50'>
+        <nav className='flex items-center justify-between md:justify-around bg-primary h-[10vh] fixed right-0 left-0 z-50'>
             <Link href="/" className="cursor-pointer">
                 <Image
                     src="/images/Cashwise.png"
                     width={150}
                     height={150}
                     alt='cashwise logo'
-                    className='cursor-pointer'
+                    className='cursor-pointer h-32 md:auto'
                 />
             </Link>
 
-            <ul className='flex items-center justify-center gap-20'>
+            <ul className='flex items-center justify-center gap-5 md:gap-20'>
                 <li>
-                    <Link href="/" className="hover:underline text-white transition-all duration-200">
+                    <Link href="/" className="hover:underline text-white transition-all duration-200 text-sm md:text-base">
                         Home
                     </Link>
                 </li>
                 <li>
-                    <Link href="/feedback" className="hover:underline text-white transition-all duration-200">
+                    <Link href="/feedback" className="hover:underline text-white transition-all duration-200 text-sm md:text-base">
                         Feedback
                     </Link>
                 </li>
@@ -124,13 +124,13 @@ export default function Navbar() {
                     <div className='relative' ref={dropdownRef}>
                         <button
                             onClick={toggleDropdown}
-                            className='flex items-center gap-2 text-white hover:text-gray-200 transition-colors duration-200 p-2 rounded-md hover:bg-white/10'
+                            className='flex items-center gap-0 sm:gap-2 text-white hover:text-gray-200 transition-colors duration-200 p-2 rounded-md hover:bg-white/10'
                             aria-expanded={isDropdownOpen}
                             aria-haspopup="true"
                         >
                             <FontAwesomeIcon
                                 icon={faUser}
-                                className='text-lg'
+                                className='text-sm sm:text-lg'
                             />
                             <FontAwesomeIcon
                                 icon={faChevronDown}
