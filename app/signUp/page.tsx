@@ -151,7 +151,7 @@ export default function SignUp() {
                     </div>
                 </form>
 
-                <div className="w-full py-5 flex items-center relative">
+                {/* <div className="w-full py-5 flex items-center relative">
                     <div className='h-px bg-[#E4E1E1] w-full'></div>
                     <span className='absolute bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2'>Or</span>
                 </div>
@@ -162,7 +162,7 @@ export default function SignUp() {
                 >
                     <span className='mr-1 text-[#CE4343] text-sm font-medium'><FontAwesomeIcon icon={faGoogle} /></span>
                     Google
-                </button>
+                </button> */}
             </div>
         </div>
     );

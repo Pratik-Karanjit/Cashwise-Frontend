@@ -31,7 +31,18 @@ export default function SignIn() {
                     password: values.password,
                 });
                 console.log("response from login", res)
-                router.push("/")
+
+                if (res?.ok) {
+                    // Wait a bit for session to update, then redirect
+                    setTimeout(() => {
+                        router.push("/")
+                        router.refresh() // Refresh to update session state
+                    }, 100)
+                } else {
+                    setErrors({
+                        error: res?.error || "Login failed",
+                    })
+                }
             } catch (error) {
                 const err = error as any;
                 console.log("error is: ", err)
@@ -87,7 +98,7 @@ export default function SignIn() {
                     <div className='w-full flex flex-col items-center justify-center gap-5'>
                         <Button text={formik.isSubmitting ? 'Submitting...' : 'Submit'} type="submit" hasArrow={false} />
                     </div>
-                    <button onClick={() => signIn("google")}>Sign in with Google</button>
+                    {/* <button onClick={() => signIn("google")}>Sign in with Google</button> */}
 
                 </form>
             </div>

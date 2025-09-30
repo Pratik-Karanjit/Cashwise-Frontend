@@ -8,8 +8,10 @@ import { useSession, signOut } from 'next-auth/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { ExtendedUser } from '../types/types'
+import { useRouter } from 'next/navigation'
 
 export default function Navbar() {
+    const router = useRouter()
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const { data: session, status } = useSession()
     const dropdownRef = useRef<HTMLDivElement>(null)
@@ -168,7 +170,7 @@ export default function Navbar() {
                                     <button
                                         onClick={() => {
                                             closeDropdown()
-                                            signOut()
+                                            signOut({ callbackUrl: '/' })
                                         }}
                                         className='block w-full text-left px-4 py-2 cursor-pointer text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors duration-150'
                                     >

@@ -26,7 +26,10 @@ export function useExpenses() {
         error
     } = useQuery({
         queryKey: ["expenses"],
-        queryFn: () => api.get("/expense/group").then(res => res.data)
+        queryFn: () => api.get("/expense/group").then(res => res.data),
+        staleTime: 0, // Always consider data stale
+        refetchOnWindowFocus: true, // Refetch when window regains focus
+        refetchOnMount: true, // Always refetch on component mount
     });
 
     // For saving expenses

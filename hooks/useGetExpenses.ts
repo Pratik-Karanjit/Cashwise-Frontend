@@ -6,12 +6,12 @@ import { getExpenses } from '../app/services/expenseService';
 
 function useGetExpenses() {
 
-     const { data, error, isLoading, refetch }  = useQuery({
-        queryKey: ["My Expenses"],
-        queryFn: getExpenses,
-        staleTime: 1000* 60 * 5,
-        retry: 2
-    })
+   const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ["expenses"], // Changed from "My Expenses"
+    queryFn: getExpenses,
+    staleTime: 1000 * 60 * 5,
+    retry: 2
+})
 
   return {
       expenses: data?.result || [],

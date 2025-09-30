@@ -77,14 +77,12 @@ const FeedbackPage = () => {
                         <h2 className="text-3xl font-bold text-secondary">Feedback time!</h2>
                     </div>
                     <div className="max-w-4xl">
-                        <p className="text-gray-700 mb-4">
-                            <div className="max-w-4xl">
-                                <p className="text-sm sm:text-base text-gray-700 mb-4">
-                                    Found a bug? Have feedback to share? Or simply want to connect?
-                                    I'd love to hear from you! Drop your details in the form below and I'll reach out personally.
-                                </p>
-                            </div>
-                        </p>
+                        <div className="max-w-4xl">
+                            <p className="text-sm sm:text-base text-gray-700 mb-4">
+                                Found a bug? Have feedback to share? Or simply want to connect?
+                                I'd love to hear from you! Drop your details in the form below and I'll reach out personally.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
