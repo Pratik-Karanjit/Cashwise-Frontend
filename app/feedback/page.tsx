@@ -58,7 +58,7 @@ const FeedbackPage = () => {
                 <div className="relative  md:bg-gray-50">
                     <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
                         <div className="md:w-1/2">
-                            <h1 className="text-5xl font-bold text-primary mb-4">Feedback</h1>
+                            <h1 className="hidden md:flex text-3xl lg:text-5xl font-bold text-primary mb-4">Feedback</h1>
                         </div>
                         <div className="hidden md:block md:w-1/2 mt-7 md:mt-0 h-72 relative justify-end">
                             <Image
@@ -72,14 +72,14 @@ const FeedbackPage = () => {
                     </div>
                 </div>
 
-                <div className="container mx-auto px-6 py-16">
+                <div className="container mx-auto px-6 py-6 sm:py-16">
                     <div className="border-l-4 border-secondary pl-4 mb-8">
                         <h2 className="text-3xl font-bold text-secondary">Feedback time!</h2>
                     </div>
                     <div className="max-w-4xl">
                         <p className="text-gray-700 mb-4">
                             <div className="max-w-4xl">
-                                <p className="text-gray-700 mb-4">
+                                <p className="text-sm sm:text-base text-gray-700 mb-4">
                                     Found a bug? Have feedback to share? Or simply want to connect?
                                     I'd love to hear from you! Drop your details in the form below and I'll reach out personally.
                                 </p>
@@ -92,8 +92,8 @@ const FeedbackPage = () => {
                     <div className="max-w-4xl mx-auto">
                         <div className=" rounded-lg overflow-hidden border border-slate-200">
                             <div className="bg-secondary py-4 px-6">
-                                <h2 className="text-2xl font-bold text-white">Feedback Form</h2>
-                                <p className="text-blue-100 mt-1">I'd love to hear from you</p>
+                                <h2 className="text-base sm:text-2xl font-bold text-white">Feedback Form</h2>
+                                <p className="text-sm sm:text-base text-blue-100 mt-1">I'd love to hear from you</p>
                             </div>
                             <div className="p-8">
                                 <Formik
@@ -104,7 +104,7 @@ const FeedbackPage = () => {
                                     {({ isSubmitting, touched, errors }) => (
                                         <Form className="space-y-6">
                                             <div>
-                                                <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+                                                <label htmlFor="name" className="block text-gray-700 text-sm sm:text-base font-medium mb-2">
                                                     Full Name
                                                 </label>
                                                 <div className="relative">
@@ -124,7 +124,7 @@ const FeedbackPage = () => {
                                             </div>
 
                                             <div>
-                                                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                                                <label htmlFor="email" className="block text-gray-700 text-sm sm:text-base font-medium mb-2">
                                                     Email Address
                                                 </label>
                                                 <div className="relative">
@@ -144,7 +144,7 @@ const FeedbackPage = () => {
                                             </div>
 
                                             <div>
-                                                <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
+                                                <label htmlFor="message" className="block text-gray-700 text-sm sm:text-base font-medium mb-2">
                                                     Your Message
                                                 </label>
                                                 <Field

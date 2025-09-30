@@ -42,11 +42,11 @@ export default function ExpensesDisplay() {
 
     return (
         <div className='flex flex-col gap-8'>
-            <h1 className="text-2xl font-semibold mb-6">My Expenses</h1>
+            <h1 className="text-2xl font-semibold mt-5 mb-3">My Expenses</h1>
 
             {groupedExpenses.map(([timestamp, settlementExpenses]) => (
                 <div key={timestamp} className='bg-white rounded-lg shadow-sm p-6'>
-                    <h2 className="text-lg font-semibold text-gray-800 mb-4">
+                    <h2 className="text-base sm:text-lg font-semibold text-gray-800 mb-4">
                         Settlement on {format(new Date(timestamp), 'PPP pp')}
                     </h2>
 
