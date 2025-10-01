@@ -35,7 +35,7 @@ export default function HeroSection() {
                     <div>
                         <span className="text-primary text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl">Count & pay</span>
                         <span className="text-secondary text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl"> responsibly</span>
-                        <p className='text-primary text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl mt-3'>By using <span className='md:text-4xl xl:text-5xl 2xl:text-6xl text-secondary'>Cashwise</span></p>
+                        <p className='text-primary text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl mt-3'>By using <span className='md:text-4xl xl:text-5xl 2xl:text-6xl text-secondary'>Cashwise!</span></p>
                     </div>
                     <div className='w-full flex justify-center'>
                         <Image
