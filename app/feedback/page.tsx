@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import Image from 'next/image';
 import { sendFeedback } from '../services/feedbackService';
 
-interface FeedbackFormValues {
+export interface FeedbackFormValues {
     name: string;
     email: string;
     message: string;
