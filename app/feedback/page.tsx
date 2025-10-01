@@ -8,6 +8,12 @@ import Swal from 'sweetalert2';
 import Image from 'next/image';
 import { sendFeedback } from '../services/feedbackService';
 
+interface FeedbackFormValues {
+    name: string;
+    email: string;
+    message: string;
+}
+
 const FeedbackPage = () => {
     const initialValues = {
         name: '',
@@ -21,7 +27,8 @@ const FeedbackPage = () => {
         message: Yup.string().required('Message is required')
     });
 
-    const onSubmit = async (values, { setSubmitting, resetForm }) => {
+    const onSubmit = async (values: FeedbackFormValues, { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }
+    ) => {
         try {
             const response = await sendFeedback(values);
             console.log("response in onSubmit", response.data.message)
