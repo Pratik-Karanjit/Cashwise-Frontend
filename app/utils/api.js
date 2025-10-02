@@ -7,12 +7,17 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(async (config) => {
-  const session = await getSession(); // get NextAuth session
-  const token = session?.user?.token; // sending backend's stored JWT in session
-  console.log("token to be sent: ", token)
+  try {
+    const session = await getSession(); // get NextAuth session
+    const token = session?.user?.token; // sending backend's stored JWT in session
+    console.log("token to be sent: ", token)
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  } catch (error) {
+    console.error("Error getting session in interceptor:", error);
+    // Don't fail the request if session retrieval fails
   }
 
   return config;
