@@ -116,17 +116,14 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) return null;
 
         try {
-          // Use the separate auth API instance instead of the main api
           const res = await authApi.post("/auth/login", {
             email: credentials.email,
             password: credentials.password,
           });
 
-          // Get the user data from the result property
           const userData = res.data?.result;
           
           if (userData) {
-            // Return all the user data
             return {
               id: userData._id,
               email: userData.email,
@@ -169,7 +166,6 @@ export const authOptions: NextAuthOptions = {
 
     async session({ session, token }) {
       if (token) {
-        // Update session with all user data from token
         session.user = {
           id: token.id,
           email: token.email,
@@ -188,12 +184,12 @@ export const authOptions: NextAuthOptions = {
   },
 
   session: { strategy: "jwt" },
-  secret: process.env.NEXTAUTH_SECRET,
   
-  // Add debug for production issues
+  // Fix the secret issue by providing a fallback
+  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET || "fallback-secret-for-development",
+  
   debug: process.env.NODE_ENV === "development",
   
-  // Add these for better error handling
   logger: {
     error(code, metadata) {
       console.error('NextAuth Error:', code, metadata);
