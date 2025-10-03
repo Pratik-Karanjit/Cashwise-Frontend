@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faGoogle, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { registerUser } from "../services/authService";
 import Button from "../../components/Button";
@@ -25,6 +25,9 @@ const validationSchema = Yup.object({
 
 export default function SignUp() {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -51,8 +54,16 @@ export default function SignUp() {
     },
   });
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center border border-[#ebe6e7] mt-16 sm:mt-24 w-fit mx-auto rounded-xl p-6 sm:p-7 max-w-sm sm:max-w-none">
+    <div className="flex flex-col items-center justify-center border border-[#ebe6e7] mt-16 sm:mt-24 w-fit mx-auto rounded-xl p-6 sm:p-7 max-w-sm mb-10 sm:max-w-none">
       <div className="flex flex-col gap-4 sm:gap-8 items-end">
         <h1 className="font-semibold text-lg sm:text-2xl font-primary mx-auto tracking-wide">
           Create Your Account
@@ -63,7 +74,7 @@ export default function SignUp() {
           className="flex flex-col gap-4 sm:gap-8"
         >
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1  w-full">
               <label className="text-sm sm:text-base">
                 First Name <span className="text-red-500">*</span>
               </label>
@@ -82,7 +93,7 @@ export default function SignUp() {
                 </span>
               )}
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 w-full">
               <label className="text-sm sm:text-base">
                 Last Name <span className="text-red-500">*</span>
               </label>
@@ -124,38 +135,71 @@ export default function SignUp() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
+            {/* Password field with eye icon */}
             <div className="flex flex-col gap-1">
               <label className="text-sm sm:text-base">
                 Password <span className="text-red-500">*</span>
               </label>
-              <input
-                type="password"
-                name="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="Password"
-                className="rounded-md shadow-sm border border-[#e5e5e5] text-primary placeholder:text-primary/50 outline-0 py-2 sm:py-2.5 px-2.5 sm:px-3 text-sm sm:text-base focus:border-secondary focus:ring-1 focus:ring-secondary min-w-0"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  placeholder="Password"
+                  className="w-full rounded-md shadow-sm border border-[#e5e5e5] text-primary placeholder:text-primary/50 outline-0 py-2 sm:py-2.5 px-2.5 sm:px-3 pr-8 sm:pr-10 text-sm sm:text-base focus:border-secondary focus:ring-1 focus:ring-secondary min-w-0"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none transition-colors duration-200"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye}
+                    className="w-3 h-3 sm:w-4 sm:h-4"
+                  />
+                </button>
+              </div>
               {formik.touched.password && formik.errors.password && (
                 <span className="text-red-500 text-xs sm:text-sm">
                   {formik.errors.password}
                 </span>
               )}
             </div>
+
+            {/* Confirm Password field with eye icon */}
             <div className="flex flex-col gap-1">
               <label className="text-sm sm:text-base">
                 Confirm Password <span className="text-red-500">*</span>
               </label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="Enter password again"
-                className="rounded-md shadow-sm border border-[#e5e5e5] text-primary placeholder:text-primary/50 outline-0 py-2 sm:py-2.5 px-2.5 sm:px-3 text-sm sm:text-base focus:border-secondary focus:ring-1 focus:ring-secondary min-w-0"
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formik.values.confirmPassword}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  placeholder="Enter password again"
+                  className="w-full rounded-md shadow-sm border border-[#e5e5e5] text-primary placeholder:text-primary/50 outline-0 py-2 sm:py-2.5 px-2.5 sm:px-3 pr-8 sm:pr-10 text-sm sm:text-base focus:border-secondary focus:ring-1 focus:ring-secondary min-w-0"
+                />
+                <button
+                  type="button"
+                  onClick={toggleConfirmPasswordVisibility}
+                  className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none transition-colors duration-200"
+                  aria-label={
+                    showConfirmPassword
+                      ? "Hide confirm password"
+                      : "Show confirm password"
+                  }
+                >
+                  <FontAwesomeIcon
+                    icon={showConfirmPassword ? faEyeSlash : faEye}
+                    className="w-3 h-3 sm:w-4 sm:h-4"
+                  />
+                </button>
+              </div>
               {formik.touched.confirmPassword &&
                 formik.errors.confirmPassword && (
                   <span className="text-red-500 text-xs sm:text-sm">
@@ -180,19 +224,6 @@ export default function SignUp() {
             </div>
           </div>
         </form>
-
-        {/* <div className="w-full py-5 flex items-center relative">
-                    <div className='h-px bg-[#E4E1E1] w-full'></div>
-                    <span className='absolute bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2'>Or</span>
-                </div>
-
-                <button
-                    onClick={() => signIn("google", { callbackUrl: "/signIn" })}
-                    className="w-full px-5 py-2 rounded-xl text-black border border-[#A39999] transition mx-auto cursor-pointer"
-                >
-                    <span className='mr-1 text-[#CE4343] text-sm font-medium'><FontAwesomeIcon icon={faGoogle} /></span>
-                    Google
-                </button> */}
       </div>
     </div>
   );

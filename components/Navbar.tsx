@@ -113,7 +113,7 @@ export default function Navbar() {
           width={150}
           height={150}
           alt="cashwise logo"
-          className="cursor-pointer h-32 md:auto"
+          className="cursor-pointer mt-3 md:auto"
         />
       </Link>
 
@@ -267,7 +267,7 @@ export default function Navbar() {
 
                 {/* User Info */}
                 <div className="px-4 py-2 border-b border-gray-100">
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-sm font-medium overflow-auto text-gray-900">
                     {user?.name || user?.email}
                   </p>
                 </div>
