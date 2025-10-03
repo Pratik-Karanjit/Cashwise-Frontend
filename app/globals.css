@@ -1,7 +1,58 @@
 @import "tailwindcss";
 
-
 @theme {
-  --color-primary: #181E4B;   /* blue */
-  --color-secondary: #4475F2; /* amber */
+  --color-primary: #181e4b; /* blue */
+  --color-secondary: #4475f2; /* amber */
+}
+
+/* iOS Safari Fixes - Only applies to iOS devices */
+
+/* Prevent iOS text size adjustment */
+@supports (-webkit-touch-callout: none) {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+/* Prevent iOS zoom on input focus - CRITICAL FIX - iOS ONLY */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Fix iOS button and input appearance - iOS ONLY */
+@supports (-webkit-touch-callout: none) {
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input {
+    -webkit-appearance: none;
+  }
+
+  input,
+  textarea,
+  select {
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+}
+
+/* Smooth scrolling for iOS */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent tap highlight on iOS */
+@supports (-webkit-touch-callout: none) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
