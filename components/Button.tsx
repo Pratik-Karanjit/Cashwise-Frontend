@@ -22,7 +22,7 @@ export default function Button({
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={`group px-8 cursor-pointer transition h-12 whitespace-nowrap rounded-lg bg-gradient-to-b ${fromColor} ${toColor} text-white shadow-button hover:from-[#3563d9] hover:to-secondary w-max ${disabled ? 'opacity-50 cursor-not-allowed' : ''
+            className={`group px-4 lg:px-8 cursor-pointer transition h-10 lg:h-12 whitespace-nowrap rounded-lg bg-gradient-to-b ${fromColor} ${toColor} text-white shadow-button hover:from-[#3563d9] hover:to-secondary w-max ${disabled ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
         >
             {text}
