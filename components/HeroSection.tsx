@@ -23,7 +23,7 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="w-full flex bg-white h-[90vh]">
+    <div className="w-full flex bg-white h-auto mb-20 md:h-[90vh]">
       <div className="w-full md:w-1/2 flex justify-center items-start pt-12 md:pt-30 lg:pt-36 xl:pt-44 md:pl-16 lg:pl-24 xl:pl-32">
         <div className="flex flex-col gap-5 px-5 sm:px-0">
           <div className="px-4 py-2 w-max rounded-full bg-[#E5EDFF] flex flex-row justify-center items-center gap-3">
