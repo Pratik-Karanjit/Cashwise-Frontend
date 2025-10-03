@@ -37,7 +37,7 @@ export default function GroupExpenses() {
     if (saveError) {
       Swal.fire({
         title: "Error!",
-        text: "Failed to save expenses. Please try again.",
+        text: "Failed to save expenses. Make sure all inputs are filled.",
         icon: "error",
         confirmButtonColor: "#3563d9",
       });
