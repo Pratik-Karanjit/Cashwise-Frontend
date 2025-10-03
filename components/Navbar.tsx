@@ -193,7 +193,7 @@ export default function Navbar() {
               <>
                 {/* User info for logged in users */}
                 <div className="px-4 py-2 border-t border-gray-100">
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-sm font-medium overflow-auto text-gray-900">
                     {user?.name || user?.email}
                   </p>
                 </div>
